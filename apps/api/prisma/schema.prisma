@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum NoteStatus {
+  Draft
+  Enriching
+  Enriched
+}
+
+model Note {
+  id        String     @id @default(cuid())
+  title     String
+  body      String
+  status    NoteStatus @default(Draft)
+  summary   String?
+  tags      String[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([status])
+}

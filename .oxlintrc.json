@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "**/dist",
+    "**/node_modules",
+    "**/routeTree.gen.ts",
+    "**/generated",
+    "**/components/ui",
+    "**/prototype"
+  ],
+  "categories": { "correctness": "error" },
+  "overrides": [
+    {
+      "files": ["apps/frontend/**/*.{ts,tsx}"],
+      "plugins": ["react", "react-hooks", "jsx-a11y"],
+      "rules": { "react-hooks/exhaustive-deps": "warn" }
+    }
+  ]
+}

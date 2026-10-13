@@ -1,0 +1,12 @@
+allowBuilds:
+  esbuild: true
+
+onlyBuiltDependencies:
+  - "@prisma/engines"
+  - esbuild
+  - lightningcss
+  - msgpackr-extract
+  - prisma
+
+packages:
+  - "apps/**"

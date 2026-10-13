@@ -1,0 +1,311 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------------------
+   Hire/Track — a monochrome, calm, dense interface.
+   The chrome is grayscale; the brand orange is confined to the logo and charts.
+   Status is carried by exactly five semantic colours.
+--------------------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "ss01";
+}
+
+:root {
+  /* Neutral base — shadcn `neutral`, kept conventional. */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.6 0 0);
+
+  /* Semantic status — every domain state maps onto one of these.
+     `-soft` is the pill fill; the base hue is the text. */
+  --neutral: oklch(0.48 0 0);
+  --neutral-soft: oklch(0.955 0 0);
+  --info: oklch(0.5 0.16 256);
+  --info-soft: oklch(0.955 0.028 256);
+  --success: oklch(0.5 0.13 152);
+  --success-soft: oklch(0.955 0.03 152);
+  --warning: oklch(0.58 0.12 72);
+  --warning-soft: oklch(0.96 0.045 82);
+  --danger: oklch(0.53 0.2 25);
+  --danger-soft: oklch(0.955 0.03 25);
+
+  /* Brand — flat mid-orange. Charts are anchored on it. */
+  --brand: oklch(0.705 0.191 42);
+  --brand-foreground: oklch(0.99 0 0);
+
+  /* Charts — orange-anchored categorical set. */
+  --chart-1: oklch(0.705 0.191 42);
+  --chart-2: oklch(0.78 0.12 78);
+  --chart-3: oklch(0.62 0.09 196);
+  --chart-4: oklch(0.56 0.12 300);
+  --chart-5: oklch(0.6 0.03 252);
+
+  --radius: 0.45rem;
+
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.955 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.6 0 0);
+
+  /* Density — `compact` for data surfaces, `comfortable` for editors. */
+  --density-row-h: 2.5rem;
+  --density-cell-y: 0.625rem;
+  --density-cell-x: 0.875rem;
+  --density-font: 0.8125rem;
+  --density-control-h: 2rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.19 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.19 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.245 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.72 0.16 25);
+  --destructive-foreground: oklch(0.145 0 0);
+  --border: oklch(1 0 0 / 9%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.7 0 0);
+
+  --neutral: oklch(0.72 0 0);
+  --neutral-soft: oklch(0.27 0 0);
+  --info: oklch(0.75 0.13 256);
+  --info-soft: oklch(0.3 0.05 256);
+  --success: oklch(0.76 0.13 152);
+  --success-soft: oklch(0.3 0.05 152);
+  --warning: oklch(0.82 0.12 82);
+  --warning-soft: oklch(0.32 0.05 82);
+  --danger: oklch(0.76 0.15 25);
+  --danger-soft: oklch(0.32 0.06 25);
+
+  --brand: oklch(0.74 0.18 45);
+  --brand-foreground: oklch(0.16 0 0);
+
+  --chart-1: oklch(0.74 0.18 45);
+  --chart-2: oklch(0.82 0.12 80);
+  --chart-3: oklch(0.7 0.09 196);
+  --chart-4: oklch(0.68 0.12 300);
+  --chart-5: oklch(0.72 0.03 252);
+
+  --sidebar: oklch(0.17 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
+  --sidebar-accent: oklch(0.245 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 9%);
+  --sidebar-ring: oklch(0.7 0 0);
+}
+
+@theme inline {
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* ---------------------------------------------------------------------------
+   Density
+--------------------------------------------------------------------------- */
+
+[data-density="compact"] {
+  --density-row-h: 2.5rem;
+  --density-cell-y: 0.625rem;
+  --density-cell-x: 0.875rem;
+  --density-font: 0.8125rem;
+  --density-control-h: 2rem;
+}
+
+[data-density="comfortable"] {
+  --density-row-h: 3.25rem;
+  --density-cell-y: 0.875rem;
+  --density-cell-x: 1.125rem;
+  --density-font: 0.875rem;
+  --density-control-h: 2.25rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Base primitives
+--------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    @apply outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* A quiet dot-grid canvas, borrowed from the references — atmosphere, not noise. */
+.app-canvas {
+  background-image: radial-gradient(
+    color-mix(in oklch, var(--foreground) 7%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  background-position: -1px -1px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Hairline rules for dense data surfaces. */
+.rule {
+  border-color: color-mix(in oklch, var(--border) 100%, transparent);
+}
+
+@keyframes ht-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ht-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-rise {
+  animation: ht-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade {
+  animation: ht-fade 0.4s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  .animate-fade {
+    animation: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in oklch, var(--foreground) 18%, transparent);
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+}

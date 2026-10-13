@@ -111,13 +111,13 @@ fatal for a template.
 Verified against `project-hr-assistant`: 227 files are tracked, and the following are
 **ignored and untracked**, existing only on the author's disk:
 
-| Path | Contents |
-|---|---|
-| `GLOSSARY.md` | the domain glossary |
-| `docs/` | all four ADRs, `agents/`, `roadmap.md` |
-| `.scratch/` | the entire issue tracker — every spec and issue file |
-| `.vscode/` | editor settings |
-| `scripts/` | would swallow the init script |
+| Path          | Contents                                             |
+| ------------- | ---------------------------------------------------- |
+| `GLOSSARY.md` | the domain glossary                                  |
+| `docs/`       | all four ADRs, `agents/`, `roadmap.md`               |
+| `.scratch/`   | the entire issue tracker — every spec and issue file |
+| `.vscode/`    | editor settings                                      |
+| `scripts/`    | would swallow the init script                        |
 
 `git check-ignore` confirms the cause: the bare `*` rule at `.gitignore:5` matches them,
 and no allow rule reaches them. A clone of that repository loses its ADRs, glossary, and
@@ -142,23 +142,23 @@ by `init:project` so derived projects do not inherit it.
 project only has `test` / `lint` / `format` at the root and requires `--filter` for
 everything else; the template adds thin wrappers so the common paths are one command.
 
-| Script | Command |
-|---|---|
-| `dev` | `pnpm --parallel --filter api --filter frontend dev` |
-| `worker` | `pnpm --filter api worker` |
-| `db:up` | `docker compose -f docker-compose.dev.yml up -d` |
-| `db:down` | `docker compose -f docker-compose.dev.yml down` |
-| `db:push` | `pnpm --filter api db:push` |
-| `db:generate` | `pnpm --filter api db:generate` |
-| `db:seed` | `pnpm --filter api db:seed` |
-| `db:studio` | `pnpm --filter api db:studio` |
-| `test` | `vitest run` |
-| `test:watch` | `vitest` |
-| `lint` | `oxlint` |
-| `format` | `oxfmt .` |
-| `format:check` | `oxfmt --check .` |
-| `typecheck` | `pnpm -r typecheck` |
-| `init:project` | `tsx scripts/init.ts` |
+| Script         | Command                                              |
+| -------------- | ---------------------------------------------------- |
+| `dev`          | `pnpm --parallel --filter api --filter frontend dev` |
+| `worker`       | `pnpm --filter api worker`                           |
+| `db:up`        | `docker compose -f docker-compose.dev.yml up -d`     |
+| `db:down`      | `docker compose -f docker-compose.dev.yml down`      |
+| `db:push`      | `pnpm --filter api db:push`                          |
+| `db:generate`  | `pnpm --filter api db:generate`                      |
+| `db:seed`      | `pnpm --filter api db:seed`                          |
+| `db:studio`    | `pnpm --filter api db:studio`                        |
+| `test`         | `vitest run`                                         |
+| `test:watch`   | `vitest`                                             |
+| `lint`         | `oxlint`                                             |
+| `format`       | `oxfmt .`                                            |
+| `format:check` | `oxfmt --check .`                                    |
+| `typecheck`    | `pnpm -r typecheck`                                  |
+| `init:project` | `tsx scripts/init.ts`                                |
 
 `dev` runs the API and frontend together; the worker is deliberately separate, matching the
 source project's split between request handling and long-running work.
@@ -198,14 +198,14 @@ No `User` model. The source project needs one only for its seeded single-user fi
 Module layout follows the source convention: `router.ts` (Hono routes), `schema.ts` (Zod),
 `service.ts` (business logic, takes `prisma` as its first argument).
 
-| Method | Path | Behaviour |
-|---|---|---|
-| `GET` | `/api/notes` | list; `status` and `q` query params, Zod-validated |
-| `POST` | `/api/notes` | create from `createNoteSchema` |
-| `GET` | `/api/notes/:id` | `HttpError(404)` when absent |
-| `PATCH` | `/api/notes/:id` | update `title` / `body` / `status` |
-| `DELETE` | `/api/notes/:id` | delete |
-| `POST` | `/api/notes/:id/enrich` | set `Enriching`, enqueue, return `202` |
+| Method   | Path                    | Behaviour                                          |
+| -------- | ----------------------- | -------------------------------------------------- |
+| `GET`    | `/api/notes`            | list; `status` and `q` query params, Zod-validated |
+| `POST`   | `/api/notes`            | create from `createNoteSchema`                     |
+| `GET`    | `/api/notes/:id`        | `HttpError(404)` when absent                       |
+| `PATCH`  | `/api/notes/:id`        | update `title` / `body` / `status`                 |
+| `DELETE` | `/api/notes/:id`        | delete                                             |
+| `POST`   | `/api/notes/:id/enrich` | set `Enriching`, enqueue, return `202`             |
 
 `app.ts` ends with `export type AppType = ReturnType<typeof createApp>`, and the frontend's
 `lib/api.ts` uses `hc<AppType>(apiBaseUrl)`. This shared RPC typing is the single most

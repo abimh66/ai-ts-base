@@ -1,0 +1,41 @@
+{
+  "name": "ai-ts-base",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A TypeScript monorepo template: Hono API, BullMQ worker, React frontend.",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "dev": "pnpm --parallel --filter api --filter frontend dev",
+    "worker": "pnpm --filter api worker",
+    "db:up": "docker compose -f docker-compose.dev.yml up -d",
+    "db:down": "docker compose -f docker-compose.dev.yml down",
+    "db:push": "pnpm --filter api db:push",
+    "db:generate": "pnpm --filter api db:generate",
+    "db:seed": "pnpm --filter api db:seed",
+    "db:studio": "pnpm --filter api db:studio",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "oxlint",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "init:project": "tsx scripts/init.ts"
+  },
+  "dependencies": {
+    "dotenv-cli": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/pg": "^8.23.1",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  },
+  "packageManager": "pnpm@10.33.0"
+}

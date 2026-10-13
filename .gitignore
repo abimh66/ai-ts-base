@@ -1,0 +1,73 @@
+# Reverse-pattern gitignore: everything is ignored unless allowed below.
+# One file for the whole monorepo — do not add per-package .gitignore files.
+
+# Ignore everything...
+*
+# ...but still descend into directories, or the rules below never match.
+!*/
+# ...except these, which the allow rules below would otherwise reach into.
+node_modules/
+dist/
+apps/api/uploads/
+
+# Git config
+!.gitignore
+
+# Documentation
+!README.md
+!GLOSSARY.md
+!docs/**
+!docs
+
+# Agent
+!CLAUDE.md
+!AGENTS.md
+
+# Issue tracker and tooling
+!.scratch/**
+!.scratch
+!scripts/**
+!scripts
+!.vscode/**
+!.vscode
+
+# Project config
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!tsconfig.json
+!tsr.config.json
+!vite.config.ts
+!vitest.config.ts
+!vitest.global-setup.ts
+!components.json
+!index.html
+!.cta.json
+
+# Prisma
+!prisma7.config.ts
+!prisma.config.ts
+!**/prisma/**
+
+# Docker
+!docker-compose*.yml
+!Dockerfile*
+
+# Linting / Formatting
+!.oxlintrc.json
+!.oxfmtrc.json
+
+# Source
+!**/src/**
+
+# Static assets served as-is (favicon, robots.txt, og images). These do not sit
+# under src/, so without this rule they are silently ignored and never shipped.
+!**/public/**
+!**/public
+
+# Env
+!.env.example
+
+# Last match wins: these sit inside dirs that `!**/src/**` re-opens above.
+**/src/generated/
+.DS_Store
